@@ -1,0 +1,29 @@
+# alacritty.toml
+# Ported from foot.ini
+# Because one terminal emulator wasn't enough apparently
+
+[font]
+size = 7.5
+
+[font.normal]
+family = "SF Mono"
+style = "Regular"
+
+[window]
+padding = { x = 20, y = 20 }
+opacity = 0.8
+
+[cursor]
+style = { shape = "Underline", blinking = "Always" }
+
+[colors.primary]
+background = "#000000"
+foreground = "#ffffff"
+
+[colors.cursor]
+text = "#ffffff"
+cursor = "#ffffff"
+
+[colors.selection]
+text = "#cccccc"
+background = "#333333"
