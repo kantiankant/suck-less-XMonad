@@ -58,7 +58,7 @@ myManageHook = composeAll
 myStartupHook :: X ()
 myStartupHook = do
     spawn "picom"
-    spawn "xwallpaper --focus /home/kant/.config/niri/walls/wall2.JPEG"
+    spawn "xwallpaper --focus ~/.xmonad/walls/wall2.JPEG"
     spawn "rm -f /tmp/xob-vol && mkfifo /tmp/xob-vol && { xob < /tmp/xob-vol & while true; do sleep 86400 > /tmp/xob-vol; done; }"
 
 -- ============================================================
