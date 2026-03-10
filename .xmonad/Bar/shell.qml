@@ -1,5 +1,4 @@
 // shell.qml — Quickshell pill bar for XMonad
-
 import Quickshell
 import Quickshell.Io
 import QtQuick
@@ -74,13 +73,14 @@ ShellRoot {
                         Layout.rightMargin: 2
                     }
 
-                    XWorkspaces { Layout.leftMargin: 4; Layout.rightMargin: 2 }
-                    PillDot {}
-                    ClockWidget { Layout.leftMargin: 4; Layout.rightMargin: 4 }
-                    TrayWidget    { Layout.leftMargin: 0; Layout.rightMargin: 0 }
-                    NetworkWidget { Layout.leftMargin: 1; Layout.rightMargin: 2 }
-                    VolumeWidget  { Layout.leftMargin: 2; Layout.rightMargin: 2 }
-                    PillDot {}
+                    XWorkspaces    { Layout.leftMargin: 4;  Layout.rightMargin: 2 }
+                    PillDot        {}
+                    ClockWidget    { Layout.leftMargin: 4;  Layout.rightMargin: 4 }
+                    BatteryWidget  { Layout.leftMargin: 1;  Layout.rightMargin: 1 }
+                    TrayWidget     { Layout.leftMargin: 0;  Layout.rightMargin: 0 }
+                    NetworkWidget  { Layout.leftMargin: 1;  Layout.rightMargin: 2 }
+                    VolumeWidget   { Layout.leftMargin: 2;  Layout.rightMargin: 2 }
+                    PillDot        {}
 
                     PillButton {
                         icon: "󰐥"

@@ -5,5 +5,7 @@ exec stack ghc -- \
   -ilib \
   -fforce-recomp \
   -main-is main \
+  -package xmonad \
+  -package xmonad-contrib \
   -v0 \
   -o "$1"

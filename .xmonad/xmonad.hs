@@ -2,6 +2,8 @@
 -- ~/.xmonad/xmonad.hs
 
 import XMonad
+import XMonad.Operations (restart)
+import System.Process (callCommand)
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
@@ -25,7 +27,7 @@ import System.Exit
 myTerminal           = "alacritty"
 myModMask            = mod4Mask
 myBorderWidth        = 2
-myFocusedBorderColor = "#ffffff"
+myFocusedBorderColor = "#FFFFFF"
 myNormalBorderColor  = "#333333"
 myWorkspaces         = ["1","2","3","4","5","6","7","8","9"]
 

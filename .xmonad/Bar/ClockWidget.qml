@@ -1,6 +1,3 @@
-// ClockWidget.qml — time + date, centrepiece of the bar now that music is gone
-// Format: "Mon 09 · 1:30 PM"
-
 import Quickshell
 import QtQuick
 

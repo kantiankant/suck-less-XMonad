@@ -15,7 +15,7 @@ Item {
     property bool connected: true
 
     Timer {
-        interval: 5000
+        interval: 100
         running: true
         repeat: true
         triggeredOnStart: true
@@ -24,19 +24,18 @@ Item {
 
     Process {
         id: netProc
-        // Skip the header line from iwctl output with NR>1
         command: ["bash", "-c",
-            "iwctl station list 2>/dev/null | awk 'NR>1 && /connected|disconnected/{print; exit}'"]
+            "iwctl station wlan0 show 2>/dev/null | grep -i 'Connected network' | grep -q '.' && echo 'YES' || echo 'NO'"]
         stdout: SplitParser {
             onRead: data => {
                 const line = data.trim()
-                if (!line || line.includes("disconnected")) {
+                if (line === "YES") {
+                    root.connected = true
+                    sigProc.running = true
+                } else {
                     root.connected = false
-                    root.icon = "󰤭"
-                    return
+                    root.icon = "󰤨"
                 }
-                root.connected = true
-                sigProc.running = true
             }
         }
     }
@@ -44,9 +43,7 @@ Item {
     Process {
         id: sigProc
         command: ["bash", "-c",
-            // NR>1 skips header; station name is first non-whitespace token
-            "STATION=$(iwctl station list 2>/dev/null | awk 'NR>1 && /connected/{print $1; exit}'); " +
-            "[ -n \"$STATION\" ] && iwctl station \"$STATION\" show 2>/dev/null | grep -i 'signal' | grep -oP '-?\\d+' | head -1"]
+            "iwctl station wlan0 show 2>/dev/null | grep -i 'signal' | grep -oP '-?\\d+' | head -1"]
         stdout: SplitParser {
             onRead: data => {
                 const rssi = parseInt(data.trim())
@@ -69,11 +66,10 @@ Item {
         Text {
             id: netIcon
             anchors.centerIn: parent
-            anchors.horizontalCenterOffset: -2
+            anchors.horizontalCenterOffset: -1
             text: root.icon
             color: root.connected ? "#ffffff" : "#666666"
             font.pixelSize: 15
-            // "monospace" won't resolve Nerd Font glyphs
             font.family: "JetBrainsMono Nerd Font"
             Behavior on color { ColorAnimation { duration: 200 } }
         }
@@ -91,10 +87,6 @@ Item {
         }
     }
 
-    // Left click: alacritty -e impala (iwd TUI)
     Process { id: impalaProc; command: ["alacritty", "--class", "floating", "-e", "impala"] }
-    // Right click: trigger a rescan
-    Process { id: iwctlScan;  command: ["bash", "-c",
-        "iwctl station $(iwctl station list 2>/dev/null | awk '/connected|disconnected/{print $1}' | head -1) scan"] }
+    Process { id: iwctlScan;  command: ["bash", "-c", "iwctl station wlan0 scan"] }
 }
-
