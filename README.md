@@ -4,9 +4,9 @@ My XMonad configuration. It works (in theory)
 ## What's in here
 | Directory | What it does |
 |-----------|-------------|
-| `xmonad/` | The window manager config that started this whole mess |
-| `alacritty/` | Terminal emulator. Fast. Doesn't crash. Unlike some employers I could name |
-| `picom/` | Compositor. Makes things look nice. Purely cosmetic. I know the feeling |
+| `xmonad/` | The window manager config |
+| `alacritty/` | Terminal emulator. Fast. Doesn't crash. |
+| `picom/` | Compositor. Makes things look nice. Purely cosmetic. |
 | `nvim/` | Text editor config. Black and white colourscheme because I've given up on joy |
 | `fastfetch/` | Tells you what computer you're on. Useful if you've forgotten. Or been asked to clear your desk |
 
@@ -33,7 +33,6 @@ iwd xprop xdotool pactl pamixer playerctl brightnessctl
 ```
 alacritty rofi firefox yazi impala
 ```
-`impala` is the iwd TUI. Left click on the wifi widget opens it. If you haven't got it, the click does nothing. I've had line managers like that.
 
 ### Screenshots
 ```
@@ -57,7 +56,7 @@ The startup hook creates a named pipe at `/tmp/xob-vol`. Volume and brightness k
 ```
 wlogout
 ```
-Power button in the bar. Left click opens it. Middle click suspends via `systemctl suspend`. If you're not on systemd, sort that out yourself. I've said my piece on this topic in other places and I'm not repeating it.
+Power button in the bar. Left click opens it. Middle click suspends via `systemctl suspend`. If you're not on systemd, sort that out yourself. I've said my piece on this topic in other places and I'm not repeating it (uhh I'll remove it later because uhhh wlogout is Wayland-only).
 
 ### Fonts
 ```
@@ -157,7 +156,6 @@ The important ones. There are others. Read the config if you're that interested.
 `M` is `mod4Mask` (Super). Volume and brightness keys also write to `/tmp/xob-vol` so the overlay bar updates. That took longer to get working than I'd like to admit.
 
 ## Notes
-- Wallpaper is hardcoded to `/home/kant/.xmonad/walls/wall2.JPEG`. Change it in `xmonad.hs` or you'll get a black background and a creeping sense of failure.
 - The bar is [Quickshell](https://quickshell.outfoxxed.me/). Launched via `spawnOnce` in the startup hook. Lives in `~/.xmonad/Bar/`.
 - `exclusiveZone` in the Quickshell config does nothing on X11. Bar padding is handled by `spacingRaw` in xmonad. Don't be fooled.
 - The network widget hardcodes `wlan0`. Wrong interface name? Update `NetworkWidget.qml`. Three occurrences. Don't miss one or you'll spend an entire afternoon wondering why nothing works. I speak from experience and a place of great personal suffering.
