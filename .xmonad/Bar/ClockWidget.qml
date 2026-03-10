@@ -1,13 +1,17 @@
-import Quickshell
 import QtQuick
 
 Item {
+    id: root
     implicitWidth: clockText.implicitWidth + 24
     implicitHeight: 26
 
-    SystemClock {
-        id: sysClock
-        precision: SystemClock.Seconds
+    property var now: new Date()
+
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+        onTriggered: root.now = new Date()
     }
 
     Rectangle {
@@ -24,8 +28,9 @@ Item {
             Text {
                 id: dateText
                 text: {
-                    sysClock.now
-                    return Qt.formatDate(new Date(), "ddd dd") + "  ·  "
+                    const d = root.now
+                    const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+                    return days[d.getDay()] + " " + String(d.getDate()).padStart(2,"0") + "  ·  "
                 }
                 color: Qt.rgba(1, 1, 1, 0.45)
                 font.pixelSize: 12
@@ -37,8 +42,12 @@ Item {
             Text {
                 id: timeText
                 text: {
-                    sysClock.now
-                    return Qt.formatTime(new Date(), "h:mm AP")
+                    const d = root.now
+                    let h = d.getHours()
+                    const ampm = h >= 12 ? "PM" : "AM"
+                    h = h % 12 || 12
+                    const m = String(d.getMinutes()).padStart(2,"0")
+                    return h + ":" + m + " " + ampm
                 }
                 color: "#ffffff"
                 font.pixelSize: 13
