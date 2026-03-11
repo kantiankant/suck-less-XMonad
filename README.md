@@ -42,7 +42,7 @@ maim xclip
 
 ### Compositor and wallpaper
 ```
-picom xwallpaper
+picom xback 
 ```
 Both launched at startup. Wallpaper is hardcoded. See Notes.
 
